@@ -1,4 +1,3 @@
-// backend/routes/paypalRoutes.js
 const express = require("express");
 const { createOrder, captureOrder } = require("../controllers/paypalController");
 

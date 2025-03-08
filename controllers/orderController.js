@@ -1,4 +1,3 @@
-// backend/controllers/orderController.js
 const Order = require('../models/Order');
 
 const createOrder = async (req, res) => {

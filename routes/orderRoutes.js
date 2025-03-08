@@ -1,4 +1,3 @@
-// backend/routes/orderRoutes.js
 const express = require('express');
 const { createOrder, getOrderById } = require('../controllers/orderController');
 
