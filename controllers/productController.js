@@ -1,7 +1,6 @@
 // backend/controllers/productController.js
 const Product = require('../models/Product');
 
-// Obtener la lista de productos
 const getProducts = async (req, res) => {
   try {
     const products = await Product.find();
@@ -12,14 +11,10 @@ const getProducts = async (req, res) => {
   }
 };
 
-// Obtener un producto por ID
 const getProductById = async (req, res) => {
   try {
-    const { id } = req.params;
-    const product = await Product.findById(id);
-    if (!product) {
-      return res.status(404).json({ message: 'Producto no encontrado' });
-    }
+    const product = await Product.findById(req.params.id);
+    if (!product) return res.status(404).json({ message: 'Producto no encontrado' });
     return res.status(200).json(product);
   } catch (error) {
     console.error(error);
@@ -27,7 +22,4 @@ const getProductById = async (req, res) => {
   }
 };
 
-module.exports = {
-  getProducts,
-  getProductById,
-};
+module.exports = { getProducts, getProductById };
