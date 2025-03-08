@@ -1,14 +1,14 @@
-// server.js
+// backend/server.js
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 
-// Importamos nuestras rutas
+// Importamos las rutas
 const userRoutes = require('./routes/userRoutes');
 const productRoutes = require('./routes/productRoutes');
-const paymentRoutes = require('./routes/paymentRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const paypalRoutes = require('./routes/paypalRoutes'); // ← Rutas de PayPal
 
 dotenv.config();
 
@@ -23,20 +23,17 @@ mongoose
   .then(() => console.log('Conectado a MongoDB'))
   .catch((error) => console.error('Error conectando a MongoDB:', error));
 
+// Middlewares
 app.use(cors());
 app.use(express.json());
 
-// Rutas de usuarios
+// Rutas de usuario, productos y órdenes
 app.use('/api/users', userRoutes);
-
-// Rutas de productos
 app.use('/api/products', productRoutes);
-
-// Rutas de pago
-app.use('/api/payment', paymentRoutes); 
-
-// Rutas de órdenes
 app.use('/api/orders', orderRoutes);
+
+// Rutas de PayPal
+app.use('/api/paypal', paypalRoutes);
 
 // Ruta de prueba
 app.get('/', (req, res) => {
